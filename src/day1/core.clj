@@ -10,6 +10,10 @@
 (def right (map #(Integer/parseInt (second %)) input))
 
 
+(defn appearances [target coll]
+  (count (filter #(= % target) coll)))
+
+
 (reduce + (map #(abs (- %1 %2)) (sort left) (sort right)))
 
-(reduce + (map (fn [x] (* (count (filter #(= x %) right)) x)) left))
+(reduce + (map #(* (appearances % right) %) left))
