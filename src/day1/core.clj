@@ -9,16 +9,9 @@
 
 (def right (mapv #(Integer/parseInt (second %)) input))
 
-
-(defn appearances [target coll]
-  (reduce (fn [acc x]
-            (if (= x target)
-              (inc acc)
-              acc))
-          0
-          coll))
+(def appearances (frequencies right))
 
 
 (time (reduce + (mapv #(abs (- %1 %2)) (sort left) (sort right))))
 
-(time (reduce + (mapv #(* (appearances % right) %) left)))
+(time (reduce + (mapv #(* (get appearances % 0) %) left)))
