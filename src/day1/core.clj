@@ -3,17 +3,22 @@
             [clojure.string :as s]))
 
 
-(def input (map #(s/split % #"   ") (line-seq (io/reader "inputday1"))))
+(def input (mapv #(s/split % #"   ") (line-seq (io/reader "inputday1"))))
 
-(def left (map #(Integer/parseInt (first %)) input))
+(def left (mapv #(Integer/parseInt (first %)) input))
 
-(def right (map #(Integer/parseInt (second %)) input))
+(def right (mapv #(Integer/parseInt (second %)) input))
 
 
 (defn appearances [target coll]
-  (count (filter #(= % target) coll)))
+  (reduce (fn [acc x]
+            (if (= x target)
+              (inc acc)
+              acc))
+          0
+          coll))
 
 
-(reduce + (map #(abs (- %1 %2)) (sort left) (sort right)))
+(time (reduce + (mapv #(abs (- %1 %2)) (sort left) (sort right))))
 
-(reduce + (map #(* (appearances % right) %) left))
+(time (reduce + (mapv #(* (appearances % right) %) left)))
