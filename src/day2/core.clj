@@ -3,10 +3,9 @@
             [clojure.string :as s]))
 
 
-(defn brute [coll]
-  (mapv (fn [i]
-          (vec (concat (subvec coll 0 i) (subvec coll (inc i)))))
-        (range (count coll))))
+(defn brute [coll] 
+  (for [i (range (count coll))]
+    (vec (concat (subvec coll 0 i) (subvec coll (inc i))))))
 
 
 (def input (->> (mapv #(s/split % #" ") (line-seq (io/reader "inputday2")))
@@ -15,14 +14,14 @@
 (def bruted-input (mapv brute input))
 
 
-(defn diff [vec]
-  (mapv #(abs (- %1 %2)) vec (next vec)))
+(defn diff [coll]
+  (mapv #(abs (- %1 %2)) coll (next coll)))
 
-(defn step? [vec]
-  (when (or (apply < vec) (apply > vec)) vec))
+(defn step? [coll]
+  (when (or (apply < coll) (apply > coll)) coll))
 
-(defn too-high? [vec]
-  (if (some #(< 3 %) vec) nil vec))
+(defn too-high? [coll]
+  (if (some #(< 3 %) coll) nil coll))
 
 
 (->> input
