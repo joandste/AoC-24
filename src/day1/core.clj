@@ -5,13 +5,13 @@
 
 (def input (mapv #(s/split % #"   ") (line-seq (io/reader "inputday1"))))
 
-(def left (mapv #(Integer/parseInt (first %)) input))
+(def left (sort (mapv #(Integer/parseInt (first %)) input)))
 
-(def right (mapv #(Integer/parseInt (second %)) input))
+(def right (sort (mapv #(Integer/parseInt (second %)) input)))
 
 (def appearances (frequencies right))
 
 
-(time (reduce + (mapv #(abs (- %1 %2)) (sort left) (sort right))))
+(reduce + (mapv #(abs (- %1 %2)) left right))
 
-(time (reduce + (mapv #(* (get appearances % 0) %) left)))
+(reduce + (mapv #(* (get appearances % 0) %) left))
