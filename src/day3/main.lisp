@@ -16,9 +16,16 @@
 (defun check-enabled (coll)
   (let ((enabled? T))
     (loop :for x :in coll
-     :collect (cond ((and enabled? (not (or (string= x "do()") (string= x "don't()")))) x)
-                    ((and enabled? (string= x "don't()")) (setq enabled? NIL) NIL)
-                    ((and (not enabled?) (string= x "do()")) (setq enabled? T) NIL)))))
+     :collect (cond ((and enabled?
+                          (not (or (string= x "do()")
+                                   (string= x "don't()"))))
+                           x)
+                    ((and enabled?
+                          (string= x "don't()"))
+                           (setq enabled? NIL) NIL)
+                    ((and (not enabled?)
+                          (string= x "do()"))
+                           (setq enabled? T) NIL)))))
 
 
 (arrow-macros:->> part1
