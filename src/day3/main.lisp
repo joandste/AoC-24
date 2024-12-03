@@ -1,9 +1,7 @@
 (ql:quickload :serapeum)
-(ql:quickload :str)
 (ql:quickload :uiop)
 (ql:quickload :alexandria)
 (ql:quickload :cl-ppcre)
-(ql:quickload :arrow-macros)
 
 
 (defvar input (uiop:read-file-string "inputday3"))
@@ -28,16 +26,16 @@
                            (setq enabled? T) NIL)))))
 
 
-(arrow-macros:->> part1
+(time (serapeum:~>> part1
   (mapcar (lambda (x) (ppcre:all-matches-as-strings "\\d+" x)))
   (mapcar (lambda (x) (mapcar #'parse-integer x)))
   (mapcar (lambda (x) (apply #'* x)))
-  (reduce #'+))
+  (reduce #'+)))
 
-(arrow-macros:->> part2
+(time (serapeum:~>> part2
   (check-enabled)
   (remove NIL)
   (mapcar (lambda (x) (ppcre:all-matches-as-strings "\\d+" x)))
   (mapcar (lambda (x) (mapcar #'parse-integer x)))
   (mapcar (lambda (x) (apply #'* x)))
-  (reduce #'+))
+  (reduce #'+)))
