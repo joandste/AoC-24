@@ -8,7 +8,9 @@
 
 (defvar input (uiop:read-file-string "inputday3"))
 
-(defvar matches (ppcre:all-matches-as-strings "mul\\(\\d+,\\d+\\)|do\\(\\)|don't\\(\\)" input))
+(defvar part1 (ppcre:all-matches-as-strings "mul\\(\\d+,\\d+\\)" input))
+
+(defvar part2 (ppcre:all-matches-as-strings "mul\\(\\d+,\\d+\\)|do\\(\\)|don't\\(\\)" input))
 
 
 (defun check-enabled (coll)
@@ -19,7 +21,13 @@
                     ((and (not enabled?) (string= x "do()")) (setq enabled? T) NIL)))))
 
 
-(arrow-macros:->> matches 
+(arrow-macros:->> part1
+  (mapcar (lambda (x) (ppcre:all-matches-as-strings "\\d+" x)))
+  (mapcar (lambda (x) (mapcar #'parse-integer x)))
+  (mapcar (lambda (x) (apply #'* x)))
+  (reduce #'+))
+
+(arrow-macros:->> part2
   (check-enabled)
   (remove NIL)
   (mapcar (lambda (x) (ppcre:all-matches-as-strings "\\d+" x)))
