@@ -8,7 +8,7 @@
     (vec (concat (subvec coll 0 i) (subvec coll (inc i))))))
 
 
-(def input (->> (mapv #(s/split % #" ") (line-seq (io/reader "inputday2")))
+(def input (->> (mapv #(s/split % #" ") (line-seq (io/reader "input/day2")))
                 (mapv #(mapv Integer/parseInt %))))
 
 (def bruted-input (mapv brute input))

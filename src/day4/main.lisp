@@ -40,7 +40,7 @@
           :collect (remove NIL (mapcar (lambda (x) (nth i x)) list))))
 
 
-(defvar input (mapcar #'string-to-list (uiop:read-file-lines "inputday4")))
+(defvar input (mapcar #'string-to-list (uiop:read-file-lines "input/day4")))
 
 (defvar aas (remove NIL (loop :for x :in (append '("") (cdr (without-last input)) '(""))
       :for i :from 0

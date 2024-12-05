@@ -3,7 +3,7 @@
             [clojure.string :as s]))
 
 
-(def input (mapv #(s/split % #"   ") (line-seq (io/reader "inputday1"))))
+(def input (mapv #(s/split % #"   ") (line-seq (io/reader "input/day1"))))
 
 (def left (sort (mapv #(Integer/parseInt (first %)) input)))
 

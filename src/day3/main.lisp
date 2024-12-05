@@ -4,7 +4,7 @@
 (ql:quickload :cl-ppcre)
 
 
-(defvar input (uiop:read-file-string "inputday3"))
+(defvar input (uiop:read-file-string "input/day3"))
 
 (defvar part1 (ppcre:all-matches-as-strings "mul\\(\\d+,\\d+\\)" input))
 

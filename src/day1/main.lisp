@@ -3,7 +3,7 @@
 (ql:quickload :uiop)
 
 
-(defvar input (mapcar (lambda (x) (mapcar #'parse-integer (str:split "   " x))) (uiop:read-file-lines "inputday1")))
+(defvar input (mapcar (lambda (x) (mapcar #'parse-integer (str:split "   " x))) (uiop:read-file-lines "input/day1")))
 
 (defvar left (sort (mapcar #'car input) #'<))
 
