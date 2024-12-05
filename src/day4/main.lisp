@@ -5,8 +5,8 @@
 (ql:quickload :str)
 
 
-(defun string-to-list (list) (loop :for i :in (alexandria:iota (length list))
-                                       :collect (char list i)))
+(defun string-to-list (list) (loop :for i :to (length list)
+                                   :collect (char list i)))
 
 (defun get-uletters (cons)
     (coerce (list (nth (- (cdr cons) 1) (nth (- (car cons) 1) input))
@@ -28,15 +28,15 @@
 (defun count-xmas (list) (reduce #'+ (mapcar (lambda (x) (+ (ppcre:count-matches "XMAS" x)
                                                             (ppcre:count-matches "SAMX" x))) list)))
 
-(defun rotate (list) (loop :for i :in (alexandria:iota (length (car list)))
+(defun rotate (list) (loop :for i :to (length (car list))
                            :collect (reverse (mapcar (lambda (x) (nth i x)) list))))
 
 (defun shift (list)
-    (loop :for i :in (alexandria:iota (length list))
+    (loop :for i :to (length list)
           :collect (append (make-list i) (nth i list))))
 
 (defun diagonate (list) 
-    (loop :for i :in (alexandria:iota (+ (length list) (- (length list) 1)))
+    (loop :for i :to (+ (length list) (- (length list) 1))
           :collect (remove NIL (mapcar (lambda (x) (nth i x)) list))))
 
 
